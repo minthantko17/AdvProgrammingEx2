@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import se233.chapter2.controller.AllEventHandlers;
 import se233.chapter2.controller.draw.DrawGraphtask;
 import se233.chapter2.model.Currency;
 
@@ -16,8 +17,14 @@ import java.util.concurrent.*;
 public class CurrencyPane extends BorderPane {
     private Currency currency;
     private Button watch;
+    private Button delete;
     public CurrencyPane(Currency currency) {
         this.watch = new Button("Watch");
+        this.delete= new Button("Delete");
+
+        this.watch.setOnAction(e -> {AllEventHandlers.onWatch(currency.getShortCode());});
+        this.delete.setOnAction(e -> {AllEventHandlers.onDelete(currency.getShortCode());});
+
         this.setPadding(new Insets(0));
         this.setPrefSize(640, 300);
         this.setStyle("-fx-border-color: black");
@@ -64,7 +71,7 @@ public class CurrencyPane extends BorderPane {
     private HBox genTopArea(){
         HBox topArea=new HBox(10);
         topArea.setPadding(new Insets(5));
-        topArea.getChildren().addAll(watch);
+        topArea.getChildren().addAll(watch, delete);
         ((HBox)topArea).setAlignment(Pos.CENTER_RIGHT);
         return topArea;
     }

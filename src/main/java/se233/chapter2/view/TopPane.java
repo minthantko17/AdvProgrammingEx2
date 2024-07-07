@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import se233.chapter2.controller.AllEventHandlers;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,9 @@ public class TopPane extends FlowPane {
         this.setPrefSize(640,20);
         change= new Button("Change");
         refresh= new Button("Refresh");
+        refresh.setOnAction(e->{
+            AllEventHandlers.onRefresh();
+        });
         update=new Label();
         refreshPane();
         this.getChildren().addAll(refresh, change, update);

@@ -65,7 +65,7 @@ public class CurrencyPane extends BorderPane {
         HBox topArea=new HBox(10);
         topArea.setPadding(new Insets(5));
         topArea.getChildren().addAll(watch);
-        ((HBox)topArea).setAlignment(Pos.CENTER);
+        ((HBox)topArea).setAlignment(Pos.CENTER_RIGHT);
         return topArea;
     }
 

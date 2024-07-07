@@ -10,6 +10,8 @@ import se233.chapter2.model.Currency;
 import se233.chapter2.view.CurrencyPane;
 import se233.chapter2.view.TopPane;
 
+import java.util.concurrent.ExecutionException;
+
 public class Launcher extends Application {
     private static Stage primaryStage;
     private static FlowPane mainPane;
@@ -36,5 +38,10 @@ public class Launcher extends Application {
         currencyPane = new CurrencyPane(currency);
         mainPane.getChildren().add(topPane);
         mainPane.getChildren().add(currencyPane);
+    }
+
+    public static void refreshPane() throws InterruptedException, ExecutionException {
+        topPane.refreshPane();
+        currencyPane.refreshPane(currency);
     }
 }

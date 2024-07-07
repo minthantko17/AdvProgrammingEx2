@@ -15,6 +15,8 @@ public class TopPane extends FlowPane {
         this.setPadding(new Insets(10));
         this.setHgap(10);
         this.setPrefSize(640,20);
+        change= new Button("Change");
+        refresh= new Button("Refresh");
         update=new Label();
         refreshPane();
         this.getChildren().addAll(refresh, change, update);

@@ -17,12 +17,15 @@ import java.util.concurrent.*;
 public class CurrencyPane extends BorderPane {
     private Currency currency;
     private Button watch;
+    private Button unWatch;
     private Button delete;
     public CurrencyPane(Currency currency) {
         this.watch = new Button("Watch");
+        this.unWatch = new Button("Unwatch");
         this.delete= new Button("Delete");
 
         this.watch.setOnAction(e -> {AllEventHandlers.onWatch(currency.getShortCode());});
+        this.unWatch.setOnAction(e ->{AllEventHandlers.unWatch(currency.getShortCode());});
         this.delete.setOnAction(e -> {AllEventHandlers.onDelete(currency.getShortCode());});
 
         this.setPadding(new Insets(0));
@@ -73,7 +76,7 @@ public class CurrencyPane extends BorderPane {
     private HBox genTopArea(){
         HBox topArea=new HBox(10);
         topArea.setPadding(new Insets(5));
-        topArea.getChildren().addAll(watch, delete);
+        topArea.getChildren().addAll(watch, unWatch, delete);
         ((HBox)topArea).setAlignment(Pos.CENTER_RIGHT);
         return topArea;
     }

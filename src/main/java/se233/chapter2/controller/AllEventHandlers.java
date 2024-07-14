@@ -99,4 +99,28 @@ public class AllEventHandlers {
             e.printStackTrace();
         }
     }
+
+    public static void unWatch(String code){
+        try {
+            List<Currency> currencyList = Launcher.getCurrencyList();
+            int index = -1;
+            for (int i = 0; i < currencyList.size(); i++) {
+                if (currencyList.get(i).getShortCode().equals(code)) {
+                    index = i;
+                }
+            }
+
+            if (index != -1) {
+                currencyList.get(index).setWatch(false);
+                currencyList.get(index).setWatchRate(0.0);
+                Launcher.setCurrencyList(currencyList);
+                Launcher.refreshPane();
+            }
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -144,6 +144,10 @@ public class AllEventHandlers {
             e.printStackTrace();
         }catch (ExecutionException e){
             e.printStackTrace();
+        }catch (NumberFormatException e){
+            Alert alert=new Alert(Alert.AlertType.NONE, "Invalid Input.\nPlease Enter Numeric Input.", new ButtonType("Try Again."));
+            alert.showAndWait();
+            onWatch(code);
         }
     }
 
@@ -154,6 +158,7 @@ public class AllEventHandlers {
             for (int i = 0; i < currencyList.size(); i++) {
                 if (currencyList.get(i).getShortCode().equals(code)) {
                     index = i;
+                    break;
                 }
             }
 

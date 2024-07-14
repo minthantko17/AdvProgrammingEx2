@@ -17,7 +17,7 @@ public class CurrencyParentPane extends ScrollPane {
         refreshPane(currencyList);
         this.setFitToWidth(true);
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
-        this.setMaxHeight(450);
+        this.setMaxHeight(600);
         this.setContent(vBox);
     }
     public void refreshPane(List<Currency> currencyList) throws ExecutionException, InterruptedException {

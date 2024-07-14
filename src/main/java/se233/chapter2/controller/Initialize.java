@@ -8,8 +8,9 @@ import java.util.List;
 
 public class Initialize {
     public static List<Currency> initializeApp(){
+        Currency baseC=new Currency("THB");
         Currency c=new Currency("USD");
-        List<CurrencyEntity> cList=FetchData.fetchRange(c.getShortCode(), 30);
+        List<CurrencyEntity> cList=FetchData.fetchRange(baseC.getShortCode(), c.getShortCode(), 30);
         c.setHistorical(cList);
         c.setCurrent(cList.get(cList.size()-1));
         List<Currency> currencyList=new ArrayList<Currency>();

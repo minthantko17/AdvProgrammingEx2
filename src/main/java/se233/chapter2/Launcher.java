@@ -11,7 +11,6 @@ import se233.chapter2.model.Currency;
 import se233.chapter2.view.CurrencyPane;
 import se233.chapter2.view.CurrencyParentPane;
 import se233.chapter2.view.TopPane;
-
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -21,11 +20,14 @@ public class Launcher extends Application {
     private static TopPane topPane;
     private static CurrencyParentPane currencyParentPane;
     private static List<Currency> currencyList;
+    public static String baseCurrency;
 
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    public static String getBaseCurrency() {return baseCurrency;}
+    public static void setBaseCurrency(String baseCurrency) {Launcher.baseCurrency = baseCurrency;}
     public static void setPrimaryStage(Stage primaryStage) {Launcher.primaryStage = primaryStage;}
     public static FlowPane getMainPane() {return mainPane;}
     public static void setMainPane(FlowPane mainPane) {Launcher.mainPane = mainPane;}
@@ -42,6 +44,7 @@ public class Launcher extends Application {
         primaryStage.setTitle("Currency Watcher");
         primaryStage.setResizable(false);
 //        System.out.println(FetchData.fetchRange("USD", 6));
+        baseCurrency = "THB";
         currencyList=Initialize.initializeApp();
         initMainPane();
         Scene mainScene=new Scene(mainPane);

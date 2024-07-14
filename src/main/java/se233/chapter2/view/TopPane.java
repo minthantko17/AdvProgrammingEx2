@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class TopPane extends FlowPane {
     private Button refresh;
     private Button add;
+    private Button changeBase;
     private Label update;
     public TopPane(){
         this.setPadding(new Insets(10));
@@ -18,13 +19,15 @@ public class TopPane extends FlowPane {
         this.setPrefSize(640,20);
         add= new Button("Add");
         refresh= new Button("Refresh");
+        changeBase= new Button("Base Currency");
 
         refresh.setOnAction(e->{AllEventHandlers.onRefresh();});
         add.setOnAction(e->{AllEventHandlers.onAdd();});
+        changeBase.setOnAction(e ->{AllEventHandlers.changeBaseCurrency();});
 
         update=new Label();
         refreshPane();
-        this.getChildren().addAll(refresh, add, update);
+        this.getChildren().addAll(refresh, add, changeBase, update);
     }
     public void refreshPane(){
         update.setText(String.format("Last update: %s", LocalDateTime.now().toString()));

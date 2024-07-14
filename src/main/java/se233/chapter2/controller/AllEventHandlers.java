@@ -29,7 +29,7 @@ public class AllEventHandlers {
             if (code.isPresent()){
                 List<Currency> currencyList=Launcher.getCurrencyList();
                 Currency c=new Currency(code.get().toUpperCase());
-                List<CurrencyEntity> cList=FetchData.fetchRange(c.getShortCode(), 30);
+                List<CurrencyEntity> cList=FetchData.fetchRange(Launcher.getBaseCurrency(), c.getShortCode(), 30);
                 c.setHistorical(cList);
                 c.setCurrent(cList.get(cList.size()-1));
                 currencyList.add(c);
@@ -65,6 +65,40 @@ public class AllEventHandlers {
         }
     }
 
+    public static void changeBaseCurrency(){
+        try{
+            TextInputDialog dialog=new TextInputDialog();
+            dialog.setTitle("Change Base Currency");
+            dialog.setHeaderText("You current currency code: "+ Launcher.getBaseCurrency());
+            dialog.setContentText("Currency code: ");
+            dialog.setGraphic(null);
+            Optional<String> code=dialog.showAndWait();
+            if (code.isPresent()){
+                List<Currency> currencyList=Launcher.getCurrencyList();
+                String prevCurrency= Launcher.getBaseCurrency().toUpperCase();
+                Launcher.setBaseCurrency(code.get().toUpperCase());
+                for(Currency c:currencyList){
+                    List<CurrencyEntity> cList;
+                    if(code.get().toUpperCase().equals(c.getShortCode())){
+                        cList = FetchData.fetchRange(c.getShortCode(), prevCurrency, 30);
+                        c.setShortCode(prevCurrency);
+                    }else {
+                        cList = FetchData.fetchRange(Launcher.getBaseCurrency(), c.getShortCode(), 30);
+                    }
+                    c.setHistorical(cList);
+                    c.setCurrent(cList.get(cList.size()-1));
+                    c.setWatch(false);
+                    c.setWatchRate(0.0);
+                }
+                Launcher.setCurrencyList(currencyList);
+                Launcher.refreshPane();
+            }
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }catch (ExecutionException e){
+            e.printStackTrace();
+        }
+    }
 
     public static void onWatch(String code){
         try{

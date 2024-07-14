@@ -29,7 +29,7 @@ public class AllEventHandlers {
             if (code.isPresent()){
                 List<Currency> currencyList=Launcher.getCurrencyList();
                 Currency c=new Currency(code.get());
-                List<CurrencyEntity> cList=FetchData.fetchRange(c.getShortCode(), 8);
+                List<CurrencyEntity> cList=FetchData.fetchRange(c.getShortCode(), 30);
                 c.setHistorical(cList);
                 c.setCurrent(cList.get(cList.size()-1));
                 currencyList.add(c);

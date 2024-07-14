@@ -26,7 +26,7 @@ public class CurrencyPane extends BorderPane {
         this.delete.setOnAction(e -> {AllEventHandlers.onDelete(currency.getShortCode());});
 
         this.setPadding(new Insets(0));
-        this.setPrefSize(640, 300);
+        this.setPrefSize(850, 300);
         this.setStyle("-fx-border-color: black");
         try {
             this.refreshPane(currency);

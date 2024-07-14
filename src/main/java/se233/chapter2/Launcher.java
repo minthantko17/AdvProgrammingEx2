@@ -26,41 +26,15 @@ public class Launcher extends Application {
         return primaryStage;
     }
 
-    public static void setPrimaryStage(Stage primaryStage) {
-        Launcher.primaryStage = primaryStage;
-    }
-
-    public static FlowPane getMainPane() {
-        return mainPane;
-    }
-
-    public static void setMainPane(FlowPane mainPane) {
-        Launcher.mainPane = mainPane;
-    }
-
-    public static TopPane getTopPane() {
-        return topPane;
-    }
-
-    public static void setTopPane(TopPane topPane) {
-        Launcher.topPane = topPane;
-    }
-
-    public static CurrencyParentPane getCurrencyParentPane() {
-        return currencyParentPane;
-    }
-
-    public static void setCurrencyParentPane(CurrencyParentPane currencyParentPane) {
-        Launcher.currencyParentPane = currencyParentPane;
-    }
-
-    public static List<Currency> getCurrencyList() {
-        return currencyList;
-    }
-
-    public static void setCurrencyList(List<Currency> currencyList) {
-        Launcher.currencyList = currencyList;
-    }
+    public static void setPrimaryStage(Stage primaryStage) {Launcher.primaryStage = primaryStage;}
+    public static FlowPane getMainPane() {return mainPane;}
+    public static void setMainPane(FlowPane mainPane) {Launcher.mainPane = mainPane;}
+    public static TopPane getTopPane() {return topPane;}
+    public static void setTopPane(TopPane topPane) {Launcher.topPane = topPane;}
+    public static CurrencyParentPane getCurrencyParentPane() {return currencyParentPane;}
+    public static void setCurrencyParentPane(CurrencyParentPane currencyParentPane) {Launcher.currencyParentPane = currencyParentPane;}
+    public static List<Currency> getCurrencyList() {return currencyList;}
+    public static void setCurrencyList(List<Currency> currencyList) {Launcher.currencyList = currencyList;}
 
     @Override
     public void start(Stage stage) throws ExecutionException, InterruptedException {

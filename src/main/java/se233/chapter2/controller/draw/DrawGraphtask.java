@@ -25,6 +25,7 @@ public class DrawGraphtask implements Callable<VBox> {
         NumberAxis yAxis=new NumberAxis();
         yAxis.setAutoRanging(true);
         LineChart lineChart=new LineChart(xAxis, yAxis);
+        lineChart.setLegendVisible(false);
         if (this.currency !=null){
             XYChart.Series series= new XYChart.Series();
             double minY=Double.MAX_VALUE;

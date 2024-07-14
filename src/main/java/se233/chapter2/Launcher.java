@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import se233.chapter2.controller.FetchData;
 import se233.chapter2.controller.Initialize;
+import se233.chapter2.controller.RefreshTask;
 import se233.chapter2.model.Currency;
 import se233.chapter2.view.CurrencyPane;
 import se233.chapter2.view.CurrencyParentPane;
@@ -72,6 +73,11 @@ public class Launcher extends Application {
         Scene mainScene=new Scene(mainPane);
         primaryStage.setScene(mainScene);
         primaryStage.show();
+
+        RefreshTask r=new RefreshTask();
+        Thread th=new Thread(r);
+        th.setDaemon(true);
+        th.start();
     }
 
     public void initMainPane() throws ExecutionException, InterruptedException {

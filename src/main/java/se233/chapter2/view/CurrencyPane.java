@@ -41,13 +41,15 @@ public class CurrencyPane extends BorderPane {
         this.currency = currency;
         Pane currencyInfo= genInfoPane();
         FutureTask futureTask=new FutureTask<VBox>(new DrawGraphtask(currency));
-        ExecutorService executor= Executors.newSingleThreadExecutor();
-        executor.execute(futureTask);
-        VBox currencyGraph=(VBox) futureTask.get();
-        Pane topArea=genTopArea();
-        this.setTop(topArea);
-        this.setLeft(currencyInfo);
-        this.setCenter(currencyGraph);
+        try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
+            executor.execute(futureTask);
+            VBox currencyGraph = (VBox) futureTask.get();
+            Pane topArea = genTopArea();
+            this.setTop(topArea);
+            this.setLeft(currencyInfo);
+            this.setCenter(currencyGraph);
+//            executor.shutdown();
+        }
     }
 
     private Pane genInfoPane() {

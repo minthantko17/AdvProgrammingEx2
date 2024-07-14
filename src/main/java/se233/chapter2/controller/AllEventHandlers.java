@@ -1,6 +1,10 @@
 package se233.chapter2.controller;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import org.json.JSONException;
 import se233.chapter2.Launcher;
 import se233.chapter2.model.Currency;
 import se233.chapter2.model.CurrencyEntity;
@@ -19,13 +23,13 @@ public class AllEventHandlers {
     }
 
     public static void onAdd(){
-        try{
             TextInputDialog dialog=new TextInputDialog();
             dialog.setTitle("Add Currency");
             dialog.setContentText("Currency code: ");
             dialog.setHeaderText(null);
             dialog.setGraphic(null);
             Optional<String> code=dialog.showAndWait();
+        try{
             if (code.isPresent()){
                 List<Currency> currencyList=Launcher.getCurrencyList();
                 Currency c=new Currency(code.get().toUpperCase());
@@ -40,6 +44,10 @@ public class AllEventHandlers {
             e.printStackTrace();
         }catch (ExecutionException e){
             e.printStackTrace();
+        }catch (JSONException e){
+            Alert alert=new Alert(Alert.AlertType.NONE, "Invalid Currency Code: "+code.get(), new ButtonType("Try Again."));
+            alert.showAndWait();
+            onAdd();
         }
     }
 
@@ -66,16 +74,16 @@ public class AllEventHandlers {
     }
 
     public static void changeBaseCurrency(){
+        String prevCurrency= Launcher.getBaseCurrency().toUpperCase();
+        TextInputDialog dialog=new TextInputDialog();
+        dialog.setTitle("Change Base Currency");
+        dialog.setHeaderText("You current currency code: "+ Launcher.getBaseCurrency());
+        dialog.setContentText("Currency code: ");
+        dialog.setGraphic(null);
+        Optional<String> code=dialog.showAndWait();
         try{
-            TextInputDialog dialog=new TextInputDialog();
-            dialog.setTitle("Change Base Currency");
-            dialog.setHeaderText("You current currency code: "+ Launcher.getBaseCurrency());
-            dialog.setContentText("Currency code: ");
-            dialog.setGraphic(null);
-            Optional<String> code=dialog.showAndWait();
             if (code.isPresent()){
                 List<Currency> currencyList=Launcher.getCurrencyList();
-                String prevCurrency= Launcher.getBaseCurrency().toUpperCase();
                 Launcher.setBaseCurrency(code.get().toUpperCase());
                 for(Currency c:currencyList){
                     List<CurrencyEntity> cList;
@@ -97,6 +105,11 @@ public class AllEventHandlers {
             e.printStackTrace();
         }catch (ExecutionException e){
             e.printStackTrace();
+        }catch(JSONException e){
+            Alert alert=new Alert(Alert.AlertType.NONE, "Invalid Currency Code: "+code.get(), new ButtonType("Try Again."));
+            Launcher.setBaseCurrency(prevCurrency);
+            alert.showAndWait();
+            changeBaseCurrency();
         }
     }
 

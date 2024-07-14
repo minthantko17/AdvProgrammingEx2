@@ -28,7 +28,7 @@ public class AllEventHandlers {
             Optional<String> code=dialog.showAndWait();
             if (code.isPresent()){
                 List<Currency> currencyList=Launcher.getCurrencyList();
-                Currency c=new Currency(code.get());
+                Currency c=new Currency(code.get().toUpperCase());
                 List<CurrencyEntity> cList=FetchData.fetchRange(c.getShortCode(), 30);
                 c.setHistorical(cList);
                 c.setCurrent(cList.get(cList.size()-1));
